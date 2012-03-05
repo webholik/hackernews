@@ -8,7 +8,7 @@ def hnid_from_url(hnurl)
   return $1.to_i
 end
 
-NEED_SUBDOMAIN = Set.new ["wordpress.com","co.uk"]
+NEED_SUBDOMAIN = Set.new ["wordpress.com","co.uk", "co.in", "com.au"]
 
 def domain(url,default = "ycombinator.com")
   return default unless url[0...4] === "http"

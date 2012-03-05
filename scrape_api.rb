@@ -10,6 +10,8 @@ require_relative "model"
 base_url = "http://news.ycombinator.com/newest"
 
 puts Time.now
+num_pages = ARGV[0].to_i || 10
+puts "Scraping #{num_pages} pages" if num_pages
 
 def scrape(max_pages = 1, base_url)
   new_stories = []
@@ -17,12 +19,16 @@ def scrape(max_pages = 1, base_url)
   found_known_story = false
   model = Model.load
 
-
   (1..max_pages).each do |i|
 
     puts "opening page #{i}: #{url}"
     
+	begin
     r = open(url).readline
+	rescue
+		puts "Opening failed"
+		return
+	end
     
     puts "found #{r.size} characters"
     
@@ -49,13 +55,14 @@ def scrape(max_pages = 1, base_url)
         new_stories << story
       end
     end
-    
+      
     break if found_known_story
     break unless nextId
 
     url = "#{base_url}/#{nextId}"
     puts "moving ahead to #{url}"
   end
+  
   
   puts "found #{new_stories.size} new stories"
   new_stories.each do |s|
@@ -69,7 +76,7 @@ end
 
 
 begin
-  scrape(20,"http://api.ihackernews.com/new")
+  scrape(num_pages,"http://api.ihackernews.com/new")
 rescue
   puts "new failed, try again later"
 end
