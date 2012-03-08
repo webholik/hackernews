@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
 	s.files = FileList['lib/**/*.rb',
 						'lib/*.rb',
 						'lib/**/model.mod',
-						'bin/hackernews']
-	s.executables << 'hackernews'
+						'bin/hacker']
+	s.executables << 'hacker'
 end
