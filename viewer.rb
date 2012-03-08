@@ -1,7 +1,7 @@
 #  A simple script to show the top 10 links in the database
 
 require 'mongo'
-num = ARGV[0].to_i || 10
+num = ARGV[0] ? ARGV[0].to_i : 10
 top_stories = []
 
 # Commented because runs in 3.276s (ten times slower than directly using Mongo)

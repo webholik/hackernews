@@ -10,7 +10,7 @@ require_relative "model"
 base_url = "http://news.ycombinator.com/newest"
 
 puts Time.now
-num_pages = ARGV[0].to_i || 10
+num_pages = ARGV[0] ? ARGV[0].to_i : 10
 puts "Scraping #{num_pages} pages" if num_pages
 
 def scrape(max_pages = 1, base_url)
