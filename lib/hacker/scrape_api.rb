@@ -9,9 +9,10 @@ require_relative "model"
 
 base_url = "http://news.ycombinator.com/newest"
 
+
 puts Time.now
-num_pages = ARGV[0] ? ARGV[0].to_i : 10
-puts "Scraping #{num_pages} pages" if num_pages
+#num_pages = ARGV[0] ? ARGV[0].to_i : 10
+#puts "Scraping #{num_pages} pages" if num_pages
 
 def scrape(max_pages = 1, base_url)
   new_stories = []
@@ -75,8 +76,8 @@ def scrape(max_pages = 1, base_url)
 end
 
 
-begin
-  scrape(num_pages,"http://api.ihackernews.com/new")
-rescue
-  puts "new failed, try again later"
-end
+#begin
+#  scrape(num_pages,"http://api.ihackernews.com/new")
+#rescue
+#  puts "new failed, try again later"
+#end
