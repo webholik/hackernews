@@ -57,6 +57,18 @@ def judger(*argv)
 		# Classify the database
 		elsif /^c/i =~ answer
 			break
+
+		elsif /^r/i =~ answer
+			require_relative 'ruby_read'
+			if not s.link_text then
+				puts "Grabbing content ..."
+				text = Parser.new(s.link_url)
+				s.link_html = text.raw_html
+				s.link_text = text.formatted_text
+			end
+			IO.popen("less", "w"){|f| f.puts s.link_text}
+			redo
+			
 			
 		#Sometimes, press Enter hard enough and it gets pressed twice
 		else

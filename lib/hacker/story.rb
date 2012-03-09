@@ -19,6 +19,9 @@ class Story
   key :like, Boolean
   key :tweeted, Boolean
   key :prediction, Float
+
+  key :link_html, String
+  key :link_text, String
   
   scope :untweeted, where(:tweeted => false)
   

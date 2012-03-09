@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
 	Hacker News post to filter out the ones that you are most likely
 	to love. 
 	EOF
+	s.homepage = 'http://github.com/webholik/hackernews'
 end
