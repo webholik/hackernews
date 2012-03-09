@@ -9,7 +9,7 @@ require_relative "utils"
 # unjudged stories, sorted by hnid descending
 
 def judger(*argv)
-	# if we gave it args, use the first to match with
+	#if we gave it args, use the first to match with
 	total = Story.count
 	if argv.size > 0
 		term = argv.first
@@ -27,8 +27,7 @@ def judger(*argv)
 		puts "#{unjudged_count} left to judge"
 		puts
 	end
-
-
+	
 	stories.each do |s|
 		puts "hnid: #{s.hnid}"
 		puts "title: #{s.link_title}"

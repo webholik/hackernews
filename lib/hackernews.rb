@@ -21,6 +21,17 @@
 	#break;
 #end
 
+require 'mongo'
+begin
+	Mongo::Connection.new()
+rescue
+	puts "Mongo server not found, creating a new one"
+	pid = Process.spawn({}, 'mongod', :out => "/dev/null")
+	Process.detach pid
+	sleep(0.5)
+	puts "New mongo server created with pid : #{pid}"
+end
+
 case ARGV[0]
 when 'judge'
 	require_relative 'hacker/judger'
@@ -39,3 +50,5 @@ else
 	puts "Usage : "
 	puts "hacker judge|scrape|view"
 end
+
+if pid then `kill #{pid}` end
