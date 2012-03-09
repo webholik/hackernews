@@ -46,18 +46,24 @@ def judger(*argv)
 		elsif /^n/i =~ answer
 			puts "you didn't like it!"
 			s.like = false
-			#sometimes I just want to ignore the current item and decide what 
-			#to do about it later
+		#sometimes I just want to ignore the current item and decide what 
+		#to do about it later
 		elsif /^i/i =~ answer   
 			puts
 			next
-		elsif /^q/i=~ answer
+
+		elsif /^q/i =~ answer
+			return
+
+		# Classify the database
+		elsif /^c/i =~ answer
 			break
-			#Sometimes, press Enter hard enough and it gets pressed twice
+			
+		#Sometimes, press Enter hard enough and it gets pressed twice
 		else
 			puts
 			puts "Sorry, didn't understand"
-			puts "Use q(quit), i(ignore), y(yes), n(no)"
+			puts "Use q(quit), i(ignore), c(classify), y(yes), n(no)"
 			sleep(0.7)	#Else, we won't see the usage message
 			puts
 			redo
