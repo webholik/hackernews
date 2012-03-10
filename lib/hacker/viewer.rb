@@ -6,10 +6,10 @@ require 'mongo'
 # Commented because runs in 3.276s (ten times slower than directly using Mongo)
 #require_relative 'story'
 #Story.all().sort{|a,b| a.prediction <=> b.prediction}.last(10).each do |i|
-#	puts i.link_title
-#	puts i.link_url
-#	puts i.prediction
-#	puts
+#	output.puts i.link_title
+#	output.puts i.link_url
+#	output.puts i.prediction
+#	output.puts
 #end 
 
 #Runs in 0.3 seconds
@@ -24,12 +24,17 @@ def view(num)
 		s1['prediction'] <=> s2['prediction']
 	end
 
-	puts "Top #{num} stories are:"
-	puts
+	output = IO.popen("less", "w")
+
+	output.puts "Top #{num} stories are:"
+	output.puts
 	top_stories.last(num).reverse.each do |story|
-		puts story['link_title']
-		puts story['link_url']
-		puts story['prediction']
-		puts
+		output.puts story['link_title']
+		output.puts story['link_url']
+		output.puts story['prediction']
+		output.puts
 	end
+
+	#less_print(output)
+	output.close
 end

@@ -42,9 +42,12 @@ when 'scrape'
 	scrape(ARGV[1] ? ARGV[1].to_i : 10,
 		   "http://api.ihackernews.com/new")
 
-when 'view'
+when 'top'
 	require_relative 'hacker/viewer'
 	view(ARGV[1] ? ARGV[1].to_i : 10)
+
+when 'collect'
+	require_relative 'hacker/viewer'
 
 else
 	puts "Usage : "

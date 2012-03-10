@@ -33,9 +33,8 @@ def judger(*argv)
 		puts "title: #{s.link_title}"
 		puts "domain: #{s.domain}"
 		puts "url: #{s.link_url}"
-		puts "user: #{s.user}"
 		puts
-		puts "previous judgment: #{s.like}" if s.like
+		#puts "previous judgment: #{s.like}" if s.like
 		puts "prediction: #{s.prediction}" if s.prediction
 		print "good? >> "
 		answer = STDIN.gets
@@ -57,6 +56,12 @@ def judger(*argv)
 		# Classify the database
 		elsif /^c/i =~ answer
 			break
+
+		elsif /^v/i =~ answer
+			pid = Process.spawn({}, "xdg-open #{s.link_url}", {:out => "/dev/null",
+															   :err => "/dev/null"})
+			Process.detach pid
+			redo
 
 		elsif /^r/i =~ answer
 			require_relative 'ruby_read'
@@ -81,9 +86,16 @@ def judger(*argv)
 		#Sometimes, press Enter hard enough and it gets pressed twice
 		else
 			puts
-			puts "Sorry, didn't understand"
-			puts "Use q(quit), i(ignore), c(classify), y(yes), n(no)"
-			sleep(0.7)	#Else, we won't see the usage message
+			puts "Usage: "
+			puts 
+			puts "quit	    - quit without classifying"
+			puts "read	    - read the story in terminal"
+			puts "yes	    - you like the story"
+			puts "no	    - you don't like the story"
+			puts "view	    - Open the page in the browser"
+			puts "ignore    - Ignore the current link, go to the next"
+			puts "classify  - Classify the whole database"
+			sleep(1)	#Else, we won't see the usage message
 			puts
 			redo
 		end
