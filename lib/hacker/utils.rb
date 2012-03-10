@@ -18,3 +18,9 @@ def domain(url,default = "ycombinator.com")
   d = pieces.last(3).join(".") if NEED_SUBDOMAIN.include? d
   return d
 end
+
+def less_print(text)
+	IO.popen("less", "w") do |pipe|
+		pipe.puts text
+	end
+end

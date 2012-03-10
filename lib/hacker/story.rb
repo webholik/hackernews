@@ -21,7 +21,7 @@ class Story
   key :prediction, Float
 
   key :link_html, String
-  key :link_text, String
+  key :parsed_html, String
   
   scope :untweeted, where(:tweeted => false)
   

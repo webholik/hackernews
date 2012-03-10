@@ -60,13 +60,21 @@ def judger(*argv)
 
 		elsif /^r/i =~ answer
 			require_relative 'ruby_read'
-			if not s.link_text then
+			if not s.parsed_html then
 				puts "Grabbing content ..."
-				text = Parser.new(s.link_url)
-				s.link_html = text.raw_html
-				s.link_text = text.formatted_text
+				if (!(text = Parser.new(s.link_url)))
+					puts "Text cannot be grabbed"
+					s.link_html = Parser.get(s.link_url)
+					redo
+				else
+					s.link_html = text.raw_html
+					s.parsed_html = text.parsed_html
+					less_print(text.formatted_text)
+				end
+
+			else
+				less_print Parser.generate_text(s.parsed_html)
 			end
-			IO.popen("less", "w"){|f| f.puts s.link_text}
 			redo
 			
 			
